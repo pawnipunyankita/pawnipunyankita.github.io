@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pawni Punyankita — ECE Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0d0f14;
+      --bg2:     #141720;
+      --bg3:     #1c2030;
+      --accent:  #7B6EF6;
+      --accent2: #A89DF9;
+      --text:    #e8eaf0;
+      --muted:   #7a8099;
+      --border:  rgba(255,255,255,0.07);
+      --green:   #4ade9a;
+      --mono:    'DM Mono', monospace;
+      --sans:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(13,15,20,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--accent2); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* SECTIONS */
+    section { padding: 5rem 2.5rem; max-width: 900px; margin: 0 auto; }
+    #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 8rem; padding-bottom: 4rem; }
+
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 11px; color: var(--accent);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    h2 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 2rem; }
+
+    /* HERO */
+    .hero-tag {
+      font-family: var(--mono); font-size: 12px; color: var(--green);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-tag::before { content:''; display:inline-block; width:28px; height:1px; background:var(--green); }
+    h1 { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    h1 span { color: var(--accent2); }
+    .hero-role { font-size: 1rem; color: var(--muted); margin-bottom: 1.25rem; font-weight: 400; }
+    .hero-sub { font-size: 1rem; color: var(--muted); max-width: 520px; margin-bottom: 2rem; line-height: 1.85; }
+    .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 0.7rem 1.4rem; border-radius: 8px;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; cursor: pointer; border: none; font-family: var(--sans);
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    .btn-sm { padding: 0.45rem 1rem; font-size: 12px; margin-top: 0.75rem; }
+
+    /* CARDS */
+    .card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem 1.75rem; margin-bottom: 14px;
+    }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .card p { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+    /* PROJECT CARDS */
+    .project-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.75rem; margin-bottom: 14px;
+      transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .project-card:hover { border-color: rgba(123,110,246,0.35); transform: translateY(-2px); }
+    .project-card:hover::before { opacity: 1; }
+    .project-header { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:0.6rem; }
+    .project-name { font-size: 1rem; font-weight: 600; }
+    .project-badge {
+      font-family: var(--mono); font-size: 10px; font-weight: 500;
+      background: rgba(123,110,246,0.15); color: var(--accent2);
+      border: 1px solid rgba(123,110,246,0.3); border-radius: 20px;
+      padding: 3px 10px; white-space: nowrap; flex-shrink: 0;
+    }
+    .project-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 0.9rem; }
+    .project-stack { display:flex; flex-wrap:wrap; gap:6px; }
+    .stack-tag {
+      font-family: var(--mono); font-size: 11px; color: var(--green);
+      background: rgba(74,222,154,0.08); border: 1px solid rgba(74,222,154,0.15);
+      border-radius: 4px; padding: 2px 8px;
+    }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 12px; }
+    .skill-group { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
+    .skill-group-title { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .skill-tag { font-size: 12px; background: var(--bg3); color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px; }
+
+    /* LEARNING */
+    .learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .learn-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; }
+    .learn-box h4 { font-size: 12px; font-family: var(--mono); color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .learn-item { font-size: 13px; color: var(--muted); padding: 4px 0; display:flex; align-items:center; gap:8px; }
+    .learn-item.done { color: var(--green); }
+    .learn-item.done::before { content: '✓'; font-size:11px; }
+    .learn-item.next::before { content: '→'; font-size:11px; color: var(--accent); }
+
+    /* CERT */
+    .cert-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.5rem 1.75rem; display:flex; align-items:center; gap:1.25rem;
+    }
+    .cert-icon {
+      width:48px; height:48px; border-radius:12px;
+      background: rgba(123,110,246,0.15); border: 1px solid rgba(123,110,246,0.25);
+      display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;
+    }
+    .cert-title { font-size: 15px; font-weight: 500; margin-bottom: 3px; }
+    .cert-meta { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent); border-radius: 12px; padding: 1.5rem 1.75rem;
+    }
+    .edu-degree { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+    .edu-uni { font-size: 14px; color: var(--accent2); margin-bottom: 6px; }
+    .edu-meta { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+    .coursework-title { font-size: 11px; color: var(--muted); margin-bottom: 6px; font-family: var(--mono); letter-spacing: 0.06em; text-transform: uppercase; }
+    .course-tags { display:flex; flex-wrap:wrap; gap:6px; }
+    .course-tag { font-size: 12px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 2px 10px; }
+
+    /* CONTACT */
+    .contact-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-top:0.5rem; }
+    .contact-link {
+      display:flex; align-items:center; gap:10px;
+      background: var(--bg2); border: 1px solid var(--border); border-radius:12px;
+      padding: 1rem 1.25rem; text-decoration:none; color: var(--muted); font-size:14px;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+    .contact-link-icon { font-size: 18px; }
+
+    /* DIVIDER */
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0 2.5rem; }
+
+    /* FOOTER */
+    footer { text-align:center; padding:2rem; font-size:12px; color:var(--muted); font-family:var(--mono); border-top:1px solid var(--border); }
+
+    /* ANIMATIONS */
+    .fade-up { opacity:0; transform:translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity:1; transform:none; }
+    @media (prefers-reduced-motion: reduce) { .fade-up { opacity:1; transform:none; } }
+
+    @media (max-width:640px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 3.5rem 1.25rem; }
+      #hero { padding-top: 7rem; padding-left: 1.25rem; padding-right: 1.25rem; }
+      .learning-grid { grid-template-columns: 1fr; }
+      .cert-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">pawni.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#learning">Learning</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="fade-up" style="width:100%">
+    <div class="hero-tag">Open to Internships</div>
+    <h1>Pawni <span>Punyankita</span></h1>
+    <p class="hero-role">ECE Student &nbsp;·&nbsp; Python Learner &nbsp;·&nbsp; Data Analytics Enthusiast</p>
+    <p class="hero-sub">
+      Electronics &amp; Communication Engineering student at Siksha 'O' Anusandhan University.
+      Currently building skills in Python, Data Analytics, Digital Electronics, and Embedded Systems.
+      Seeking internship opportunities to apply engineering and analytical problem-solving to real-world challenges.
+    </p>
+    <div class="hero-cta">
+      <a href="resume.pdf" class="btn btn-primary" target="_blank">Download Resume</a>
+      <a href="#projects" class="btn btn-ghost">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="fade-up">
+    <p class="section-eyebrow">Background</p>
+    <h2>Professional Summary</h2>
+    <div class="card">
+      <p>
+        B.Tech Electronics and Communication Engineering student graduating in 2029.
+        Completed Deloitte's Data Analytics Job Simulation through Forage, gaining exposure to data analysis and forensic technology.
+        Currently strengthening programming skills in Python while developing projects in digital electronics, signal processing, and engineering simulations.
+      </p>
+    </div>
+    <div class="edu-card" style="margin-top:14px;">
+      <div class="edu-degree">B.Tech — Electronics &amp; Communication Engineering</div>
+      <div class="edu-uni">Siksha 'O' Anusandhan University</div>
+      <div class="edu-meta">Expected Graduation: 2029</div>
+      <div class="coursework-title">Relevant Coursework</div>
+      <div class="course-tags">
+        <span class="course-tag">Programming Fundamentals</span>
+        <span class="course-tag">Digital Electronics</span>
+        <span class="course-tag">Basic Electrical Engineering</span>
+        <span class="course-tag">Engineering Mathematics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="fade-up">
+    <p class="section-eyebrow">What I work with</p>
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Programming</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">C (Basic)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Data &amp; Analytics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Forensic Technology</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Electronics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Digital Electronics</span>
+          <span class="skill-tag">Signal Systems</span>
+          <span class="skill-tag">Circuit Design</span>
+          <span class="skill-tag">TINA Simulation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Teamwork</span>
+          <span class="skill-tag">Communication</span>
+          <span class="skill-tag">Problem Solving</span>
+          <span class="skill-tag">Time Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="fade-up">
+    <p class="section-eyebrow">Experience</p>
+    <h2>Virtual Experience</h2>
+    <div class="card">
+      <h3>Deloitte Data Analytics Job Simulation</h3>
+      <p style="margin-bottom:0.75rem;">Completed Deloitte's virtual experience program through Forage, working on real-world style business problems.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Data Analysis</span>
+        <span class="stack-tag">Forensic Technology</span>
+        <span class="stack-tag">Business Problem Solving</span>
+        <span class="stack-tag">Analytical Thinking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="fade-up">
+    <p class="section-eyebrow">What I've built</p>
+    <h2>Projects</h2>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-name">Amplitude Modulation &amp; Demodulation System</div>
+        <span class="project-badge">Simulation</span>
+      </div>
+      <p class="project-desc">
+        Designed and simulated a complete AM communication system. Implemented modulation and demodulation stages,
+        analyzed carrier signals, and validated signal recovery against theoretical predictions.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">TINA Simulation</span>
+        <span class="stack-tag">Signal Processing</span>
+        <span class="stack-tag">Analog Electronics</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-name">4-Way Automatic Traffic Light Controller</div>
+        <span class="project-badge">Digital Design</span>
+      </div>
+      <p class="project-desc">
+        Developed a digital logic traffic controller using TINA Simulation. Implemented timed sequencing for
+        red, yellow, and green light transitions across all four directions to simulate real-world traffic signal management.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">TINA Simulation</span>
+        <span class="stack-tag">Digital Electronics</span>
+        <span class="stack-tag">Logic Design</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="fade-up">
+    <p class="section-eyebrow">Credentials</p>
+    <h2>Certifications</h2>
+    <div class="cert-card">
+      <div class="cert-icon">📊</div>
+      <div>
+        <div class="cert-title">Deloitte Data Analytics Job Simulation</div>
+        <div class="cert-meta">Issued by Deloitte &amp; Forage &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Data Analysis, Forensic Technology</div>
+        <a href="Data_Analytics_Delloite__Certificate_.pdf" class="btn btn-ghost btn-sm" target="_blank">View Certificate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- CURRENTLY LEARNING -->
+<section id="learning">
+  <div class="fade-up">
+    <p class="section-eyebrow">In progress</p>
+    <h2>Currently Learning</h2>
+    <div class="learning-grid">
+      <div class="learn-box">
+        <h4>✅ Completed</h4>
+        <div class="learn-item done">Variables</div>
+        <div class="learn-item done">Data Types</div>
+        <div class="learn-item done">Loops</div>
+        <div class="learn-item done">Functions</div>
+        <div class="learn-item done">Lists</div>
+        <div class="learn-item done">Tuples</div>
+      </div>
+      <div class="learn-box">
+        <h4>🚀 Learning Next</h4>
+        <div class="learn-item next">Dictionaries</div>
+        <div class="learn-item next">File Handling</div>
+        <div class="learn-item next">OOP</div>
+        <div class="learn-item next">NumPy</div>
+        <div class="learn-item next">Pandas</div>
+        <div class="learn-item next">Data Visualization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider"/>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="fade-up">
+    <p class="section-eyebrow">Let's connect</p>
+    <h2>Get in Touch</h2>
+    <p style="color:var(--muted); font-size:14px; margin-bottom:1.5rem; max-width:480px;">
+      I'm open to internship opportunities, collaborations, and interesting projects. Feel free to reach out!
+    </p>
+    <div class="contact-grid">
+      <a href="mailto:pawnipunyankita@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉️</span>
+        <span>pawnipunyankita@gmail.com</span>
+      </a>
+      <a href="tel:+917205702978" class="contact-link">
+        <span class="contact-link-icon">📞</span>
+        <span>+91 72057 02978</span>
+      </a>
+      <a href="https://github.com/pawnipunyankita" target="_blank" class="contact-link">
+        <span class="contact-link-icon">💻</span>
+        <span>github.com/pawnipunyankita</span>
+      </a>
+      <a href="https://www.linkedin.com/in/pawni-punyankita-127769380/" target="_blank" class="contact-link">
+        <span class="contact-link-icon">💼</span>
+        <span>LinkedIn Profile</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Pawni Punyankita &nbsp;·&nbsp; Built with HTML &amp; CSS</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
