@@ -1,6 +1,6 @@
 # 🌐 Pawni Punyankita — Portfolio Website
 
-Personal portfolio website built with HTML & CSS, hosted on GitHub Pages.
+Personal portfolio website built with HTML, hosted on GitHub Pages.
 
 🔗 **Live site:** [pawnipunyankita.github.io](https://pawnipunyankita.github.io)
 
