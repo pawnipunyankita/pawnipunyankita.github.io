@@ -26,8 +26,7 @@ Passionate about digital electronics, Programming, and data analytics.
 
 ## 🛠️ Built With
 
-- HTML5
-- CSS3
+- HTML
 - Hosted on GitHub Pages
 
 ---
